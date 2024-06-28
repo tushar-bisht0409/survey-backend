@@ -16,7 +16,16 @@ router.get('/get-user-marks', surveyController.getUserSurveyMarks);
 
 router.get('/get-user-survey', surveyController.getUserSurvey);
 
+router.get('/get-status-survey', surveyController.getSurveyByStatus);
+
+router.get('/get-status-survey-csv', surveyController.getSurveyByStatusCsv);
+
+
+router.get('/get-user-today', surveyController.getUserTodaysSurvey);
+
 router.post('/update', surveyController.updateSurvey);
+
+router.post('/update-status', surveyController.updateSurveyStatus);
 
 router.post('/delete', surveyController.deleteSurvey);
 

@@ -1,21 +1,26 @@
+const { uuid } = require('uuidv4');
 const User = require('../models/user');
+const Geojson = require('../models/geojson');
 
 exports.saveUser = async (req, res) => {
     try {
         const {
             user_id,
             password,
-            range,
-            center
+            coordinates
         } = req.body;
 
         const newUser = new User({
             user_id,
             password,
-            range,
-            center
+        });
+        const newGeojson = new Geojson({
+            geojson_id: uuid(),
+            user_id,
+            coordinates
         });
 
+        await newGeojson.save();
         await newUser.save();
 
         return res.status(201).json({
@@ -63,7 +68,7 @@ exports.getUser = async (req, res) => {
 exports.getAllUser = async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 10;
+        const limit = parseInt(req.query.limit) || 20;
 
         const skip = (page - 1) * limit;
 
@@ -102,12 +107,19 @@ exports.updateUser = async (req, res) => {
         const {
             user_id,
             password,
-            range,
-            center
+            coordinates
         } = req.body;
 
+        const newGeojson = new Geojson({
+            geojson_id: uuid(),
+            user_id,
+            coordinates
+        });
+
+        await newGeojson.save();
+
         const user = await User.findOneAndUpdate({ user_id },
-            {password, range, center}
+            {password}
         );
 
         if(!user) {

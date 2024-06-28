@@ -18,6 +18,13 @@ const surveySchema = new Schema({
     image_url: {
         type: String
     },
+    survey_status: {
+        type: String,
+        default: 'pending'
+    },
+    survey_remarks: [{
+        type: String,
+    }],
     information: {},
     created_at: {
         type: Date,
