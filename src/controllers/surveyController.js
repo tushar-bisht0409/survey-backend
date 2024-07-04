@@ -15,7 +15,7 @@ exports.saveSurvey = async (req, res) => {
         const {count, s_id} = generateSurveyId();
         const newSurvey = new Survey({
             survey_id: s_id,
-            survey_count: count,
+            survey_number: count,
             user_id,
             coordinates,
             image_url,
