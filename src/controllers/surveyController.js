@@ -12,8 +12,10 @@ exports.saveSurvey = async (req, res) => {
             information
         } = req.body;
 
+        const {count, s_id} = generateSurveyId();
         const newSurvey = new Survey({
-            survey_id: generateSurveyId(),
+            survey_id: s_id,
+            survey_count: count,
             user_id,
             coordinates,
             image_url,
@@ -346,7 +348,8 @@ exports.getUserSurveyMarks = async (req, res) => {
             allMarks.push({
                 survey_id: survey.survey_id,
                 coordinates: survey.coordinates,
-                building_name: survey.information.building_name
+                building_name: survey.information.building_name,
+                survey_status: survey.survey_status
             })
         })
         if (surveys.length === 0) {

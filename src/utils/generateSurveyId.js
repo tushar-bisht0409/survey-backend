@@ -1,11 +1,24 @@
+const Survey = require("../models/survey");
+
 let currentId = 0;
 
-exports.generateSurveyId = ()=> {
-  if (currentId < 999999) {
-    currentId++;
-  } else {
-    currentId = 1000000;
+exports.getSurveyCount = async () => {
+  const survey = await Survey.find().sort({ survey_number: -1 }).limit(1);
+  if(survey) {
+    if(survey.survey_number){
+      currentId = survey.survey_number
+    }
   }
-  
-  return `TM-${currentId.toString().padStart(6, '0')}`;
+}
+
+
+exports.generateSurveyId = ()=> {
+  const digit = currentId.toString().length;
+  currentId++;
+  if(digit < 6){
+    return {count: currentId, s_id: `TM-${currentId.toString().padStart(6-digit, '0')}`};
+  }
+  else {
+    return {count: currentId, s_id: `TM-${currentId.toString()}`};
+  }  
 }

@@ -7,6 +7,11 @@ const surveySchema = new Schema({
         unique: true,
         required: true
     },
+    survey_number: {
+        type: Number,
+        unique: true,
+        required: true
+    },
     user_id: {
         type: String,
         required: true
