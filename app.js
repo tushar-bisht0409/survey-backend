@@ -7,6 +7,7 @@ const surveyRoutes = require('./src/routes/surveyRoutes');
 const uploadRoutes = require('./src/routes/uploadRoutes');
 const geojsonRoutes = require('./src/routes/geojsonRoutes');
 const markedpointRoutes = require('./src/routes/markedpointRoutes');
+const formRoutes = require('./src/routes/formRoutes');
 const passport = require("passport");
 
 const app = express();
@@ -25,5 +26,6 @@ app.use('/api/survey/', surveyRoutes);
 app.use('/api/upload/', uploadRoutes);
 app.use('/api/geojson/', geojsonRoutes);
 app.use('/api/mp/', markedpointRoutes);
+app.use('/api/form/', formRoutes);
 
 module.exports = app;
